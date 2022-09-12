@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, } from 'rxjs';
+import { API_KEY } from 'environments';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +30,11 @@ export class WeatherService {
     this._fiveDaysWeather.next(data)
   }
 
-  setMinTotal(data: number){
+  setMinTotal(data: number) {
     this._minTotal.next(data)
   }
 
-  setMaxTotal(data: number){
+  setMaxTotal(data: number) {
     this._minTotal.next(data)
   }
 
@@ -43,15 +45,14 @@ export class WeatherService {
 
 
   getWeather(lon: number | null, lat: number | null, apiKey: string) {
-
     if (lon !== null && lat !== null) {
-      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=0fb7c2134df34390a984cdd3448c38de&units=metric`).subscribe(
-        resp => this.setWeatherInfo(resp)
-
-      )
-
+      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`).subscribe(resp => this.setWeatherInfo(resp))
     }
   }
+
+
+
+
 
   getFiveDays(lon: number | null, lat: number | null, apikey: string) {
 
@@ -76,10 +77,10 @@ export class WeatherService {
         // MIN de todos los dias
         minTemp = Math.min(...arrayFiveDaysTemperaturas)
         this.setMinTotal(minTemp)
-        
+
         if (minTemp !== undefined && maxTemp !== undefined) {
 
-          
+
           resp.list.forEach((e: any) => {
             arrayFiveDays.push({
               'day': `${e.dt_txt.slice(5, 10)}`,
@@ -89,12 +90,14 @@ export class WeatherService {
               'rain': e.rain?.['3h'] | 0,
               'snow': e.snow?.['3h'] | 0,
               'mode': e.weather[0].description,
+              'main': e.weather[0].main,
               'visibility': e.visibility,
               'speedWind': e.wind.speed
 
             })
           })
         }
+
         return arrayFiveDays
       })
 
@@ -104,5 +107,5 @@ export class WeatherService {
 
   }
 
-  
+
 }

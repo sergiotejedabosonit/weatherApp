@@ -47,6 +47,7 @@ export class LocationCardComponent implements OnInit {
 
     this.ws.weatherInfo$.subscribe(
       resp => {
+        console.log(resp)
         if (resp.main.temp !== undefined) {
 
           this.tempToday = {
