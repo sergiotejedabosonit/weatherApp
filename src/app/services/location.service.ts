@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LngLatLike } from 'mapbox-gl';
 import { BehaviorSubject } from 'rxjs';
 import { infoApp } from '../interfaces/interfaces';
 import { WeatherService } from './weather.service';
@@ -14,11 +15,19 @@ export class LocationService {
   })
   public infoApp$ = this._infoApp.asObservable()
 
+  private _infoMap = new BehaviorSubject<LngLatLike>([undefined, undefined])
+  public infoMap$ = this._infoMap.asObservable()
+
   // actualizar location con el buscador
   setInfoApp(data: infoApp) {
     this._infoApp.next(data)
   }
 
+  setInfoMap(data: LngLatLike){
+    this._infoMap.next(data)
+  }
+
+ 
   // functions location 
   getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -35,12 +44,20 @@ export class LocationService {
     this.getPosition().then(pos => {
       console.log('lat', pos.lat, 'lon', pos.lng)
       this.setInfoApp({
-        lon: pos.lat  ,
+        lon: pos.lat,
         lat: pos.lng
-    });
-    this.ws.getWeather(pos.lng, pos.lat, 'asas')
-    this.ws.getFiveDays(0,0,'sas')
-  })}
+      });
+      this.ws.getWeather(pos.lng, pos.lat, 'asas')
+      this.ws.getFiveDays(0, 0, 'sas')
+      this.setInfoMap([pos.lng, pos.lat])
+    })
+  }
+
+  getLocationMap(lng: number, lat: number) {
+     this.setInfoMap([lng, lat])
+    
+  }
+
 
   constructor(
     private ws: WeatherService

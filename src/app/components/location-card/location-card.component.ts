@@ -47,13 +47,14 @@ export class LocationCardComponent implements OnInit {
 
     this.ws.weatherInfo$.subscribe(
       resp => {
-        console.log(resp)
+       
         if (resp.main.temp !== undefined) {
-
+          
           this.tempToday = {
             deg: resp.wind.deg,
             speed: resp.wind.speed,
             mode: resp.weather[0].description,
+            main: resp.weather[0].main,
             humidity: resp.main.humidity,
             temp: resp.main.temp,
             max: resp.main.temp_max,
@@ -63,7 +64,7 @@ export class LocationCardComponent implements OnInit {
           }
 
           this.nameCity = `${resp.name}, ${resp.sys.country}`
- 
+          console.log(this.tempToday)
         }
 
 

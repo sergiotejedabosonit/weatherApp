@@ -1,36 +1,62 @@
 <div class="row widht_court">
     <div class="row p-3">
         <div *ngIf="today.hour < 13">
-            {{today.day}} {{ today.hour | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} am
+           <h5> {{today.day}} {{ today.hour | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} am </h5>
         </div>
         <div *ngIf="today.hour > 12 && today.hour < 24 ">
-            {{today.day}} {{ today.hour -12 | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} pm
+          <h5>  {{today.day}} {{ today.hour -12 | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} pm </h5>
         </div>
     </div>
     <hr>
-    <div class="col-4 container_first_card">
+    <div class="col-6 container_first_card">
 
 
-        <div class="row">
+        <div class="row text-center">
             <h5> {{nameCity}} </h5>
         </div>
-        <div class="row">
+        <div class="row text-center">
             <h3> {{tempToday.temp | number:".0-0" }} ºC </h3>
         </div>
 
     </div>
-    <div class="col-8">
-        <div *ngIf="tempToday.mode === 'clear sky'">
+    <div class="col-6">
+        <div *ngIf="tempToday.main === 'Clear'">
             <img src="../../../assets/icons/dom.png" class="icons_weather" />
         </div>
-        <div *ngIf="tempToday.mode === 'scattered clouds'">
+        <div *ngIf="tempToday.main === 'Clouds' && tempToday.mode === 'few clouds'">
+            <img src="../../../assets/icons/nubladoOne.png" class="icons_weather" />
+        </div>
+        <div *ngIf="tempToday.main === 'Clouds' && tempToday.mode === 'scattered clouds'">
             <img src="../../../assets/icons/nublado.png" class="icons_weather" />
         </div>
-        <div *ngIf="tempToday.mode === 'broken clouds'">
+        <div *ngIf="tempToday.main === 'Clouds' && tempToday.mode === 'broken clouds'">
             <img src="../../../assets/icons/nube.png" class="icons_weather" />
         </div>
 
+        <div *ngIf="tempToday.main === 'Clouds' && tempToday.mode === 'overcast clouds'">
+            <img src="../../../assets/icons/nube.png" class="icons_weather" />
+        </div>
+        <div *ngIf="tempToday.main === 'Drizzle'">
+            <img src="../../../assets/icons/lluvia.png" class="icons_weather" />
+        </div>
+        <div *ngIf="tempToday.main === 'Rain'">
+            <img src="../../../assets/icons/lluviaSol.png" class="icons_weather" />
+        </div>
+        <div *ngIf="tempToday.main === 'Thunderstorm'">
+            <img src="../../../assets/icons/tormenta.png" class="icons_weather" />
+        </div>
+        <div *ngIf="tempToday.main === 'Snow'">
+            <img src="../../../assets/icons/nevando.png" class="icons_weather" />
+        </div>
+        <div *ngIf="tempToday.main === 'Snow'">
+            <img src="../../../assets/icons/nevando.png" class="icons_weather" />
+        </div>
+        <div
+            *ngIf="tempToday.main === 'Mist' || tempToday.main === 'Smoke' || tempToday.main === 'Haze' || tempToday.main === 'Dust' || tempToday.main === 'Fog' || tempToday.main === 'Sand' || tempToday.main === 'Ash' || tempToday.main === 'Squall' || tempToday.main === 'Tornado' ">
+            <img src="../../../assets/icons/tornado.png" class="icons_weather" />
+        </div>
     </div>
+
     <div class="row">
         <p class='title-subtitleCard'>
             <strong> Feels like {{tempToday.temp}}º. {{tempToday.mode | titlecase}} </strong>

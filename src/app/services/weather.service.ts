@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, } from 'rxjs';
-import { API_KEY } from 'environments';
+import { environment } from 'src/environments/environment';
+ 
 
 
 @Injectable({
@@ -46,7 +47,7 @@ export class WeatherService {
 
   getWeather(lon: number | null, lat: number | null, apiKey: string) {
     if (lon !== null && lat !== null) {
-      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`).subscribe(resp => this.setWeatherInfo(resp))
+      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${environment.API_KEY}&units=metric`).subscribe(resp => this.setWeatherInfo(resp))
     }
   }
 
