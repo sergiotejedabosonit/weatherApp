@@ -1,0 +1,38 @@
+<ng-container *ngIf="lineChartData.labels?.length === 0; else elseTemplate">
+    Cargando...
+</ng-container>
+
+<ng-template #elseTemplate>
+    <ng-container *ngIf="tempOrRain; else secondT">
+       
+
+        <div class="flex">
+            <div class="flex-item">
+                <div style="display: block;">
+                    <canvas baseChart width="400" height="250" [data]="lineChartData" [options]="lineChartOptions" class="px-3"
+                        [type]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+        <button (click)="changeGrafic(false)" pButton pRipple type="button"   class="p-button-outlined p-button-secondary float-end">LLuvia/Nieve</button>
+    </ng-container>
+    <ng-template #secondT>
+        
+
+        <div style="display: block">
+            <canvas baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [type]="barChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>
+          </div>
+          <button (click)="changeGrafic(true)"  pButton pRipple type="button"   class="p-button-outlined p-button-secondary float-end">Temperaturas</button>
+    </ng-template>
+
+   
+</ng-template>

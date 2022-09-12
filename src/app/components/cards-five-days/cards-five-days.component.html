@@ -1,0 +1,51 @@
+<ng-container *ngIf="products.length < 5; else elseTemplate">
+    Cargando
+</ng-container>
+<ng-template #elseTemplate>
+
+    <p-carousel [value]="products" orientation="vertical" [style]="{'max-height':'600px', 'margin-top':'2em'}"
+        verticalViewPortHeight="400px" [numVisible]="1">
+        <ng-template let-day pTemplate="item">
+            <div class="product-item">
+                <div class="product-item-content">
+                    <div>
+                        <h5 class="px-5">
+                           Dia: {{day.day}}
+                        </h5>
+
+                    </div>
+                    <hr>
+                    <div class="row pt-5 px-4">
+                        <div class="col-4">
+                            <h5>{{day.temp | number:".0-0"}} ºC</h5>
+                        </div>
+                        <div class="col-8">
+                            <div *ngIf="day.mode === 'broken clouds'">
+                                <img src="../../../assets/icons/nube.png" width="50px" height="50px">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row px-4 pt-5">
+                        <div class="col-6">
+                            <p>Speed Wind: {{day.speedWind}}km/h</p>
+                            <p>{{day.mode | titlecase}}</p>
+                            <p>Rain: {{day.rain}}%</p>
+                        </div>
+                        <div class="col-6">
+                            <p>Humidity: {{day.humidity}}%</p>
+                            <p>Visibility: {{day.visibility}}km</p>
+                            <p>Snow: {{day.snow}}%</p>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+
+</ng-template>

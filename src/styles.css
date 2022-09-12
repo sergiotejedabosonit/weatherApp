@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+.container_first_card{
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 25px;
+     
+
+    
+
+}
+.widht_court{
+    width: 95%;
+}
+
+.icons_weather{
+    width: 200px;
+    height: 170px;
+    padding: 30px;
+
+}
+
+.title-subtitleCard{
+    padding-left: 20px;
+}
