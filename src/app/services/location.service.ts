@@ -42,13 +42,13 @@ export class LocationService {
 
   getLocation() {
     this.getPosition().then(pos => {
-      console.log('lat', pos.lat, 'lon', pos.lng)
+      
       this.setInfoApp({
         lon: pos.lat,
         lat: pos.lng
       });
-      this.ws.getWeather(pos.lng, pos.lat, 'asas')
-      this.ws.getFiveDays(0, 0, 'sas')
+      this.ws.getWeather(pos.lng, pos.lat )
+      this.ws.getFiveDays(pos.lng, pos.lat )
       this.setInfoMap([pos.lng, pos.lat])
     })
   }

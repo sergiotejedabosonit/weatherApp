@@ -40,7 +40,7 @@ export class TableFiveDaysComponent implements OnInit {
     )
 
     this.ws.weatherInfo$.subscribe( resp => {
-     console.log(resp)
+     
        if(resp.rain?.['1h'] !== undefined){
            this.barChartData.datasets[0].data?.push(resp.rain?.['1h']*100)
        }
@@ -48,10 +48,10 @@ export class TableFiveDaysComponent implements OnInit {
           this.barChartData.datasets[1].data?.push(resp.snow?.['1h']*100)
        }
       
-       console.log(this.barChartData.datasets)
+       
      } )
 
-    this.ws.fiveDaysInfo$.subscribe( console.log)
+   
   }
 
   changeGrafic(data: boolean){
@@ -140,11 +140,11 @@ export class TableFiveDaysComponent implements OnInit {
       { data: [ ],
         backgroundColor: '#AED6F1' ,
         hoverBackgroundColor: '#2980B9', 
-        label: 'Rain' },
+        label: '% Rain' },
       { data: [ ],
         backgroundColor: '#D6DBDF' ,
         hoverBackgroundColor: '#34495E', 
-         label: 'Snow' }
+         label: '% Snow' }
     ]
   };
  

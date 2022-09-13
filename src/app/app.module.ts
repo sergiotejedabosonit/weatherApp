@@ -12,7 +12,6 @@ import { NgChartsModule } from 'ng2-charts';
 import { CardsFiveDaysComponent } from './components/cards-five-days/cards-five-days.component';
 import { NgPrimeModule } from './ng-prime/ng-prime.module';
 import { MapBoxComponent } from './components/map-box/map-box.component'; 
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,15 +20,13 @@ import { FormsModule } from '@angular/forms';
     LocationCardComponent,
     TableFiveDaysComponent,
     CardsFiveDaysComponent,
-    MapBoxComponent,
-     
+    MapBoxComponent 
   ],
   imports: [
     BrowserModule,
     NgChartsModule,
     HttpClientModule,
-    NgPrimeModule,
-    FormsModule     
+    NgPrimeModule        
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map,  tap } from 'rxjs';
+import { BehaviorSubject, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
- 
+
 
 
 @Injectable({
@@ -43,31 +43,21 @@ export class WeatherService {
     private http: HttpClient
   ) { }
 
-
-
-  getWeather(lon: number | null, lat: number | null, apiKey: string) {
+  getWeather(lon: number | null, lat: number | null) {
     if (lon !== null && lat !== null) {
-      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${environment.API_KEY}&units=metric`).pipe(
-        tap(e => console.log(e))
-      ).subscribe(resp => this.setWeatherInfo(resp))
+      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${environment.API_KEY}&units=metric`).subscribe(resp => this.setWeatherInfo(resp))
     }
   }
 
+  getFiveDays(lon: number | null, lat: number | null) {
 
-
-
-
-  getFiveDays(lon: number | null, lat: number | null, apikey: string) {
-
-    this.http.get<any>('https://api.openweathermap.org/data/2.5/forecast?lat=-0,43&lon=39,18&appid=0fb7c2134df34390a984cdd3448c38de&units=metric').pipe(
+    this.http.get<any>(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${environment.API_KEY}&units=metric`).pipe(
       map(resp => {
-        console.log(resp)
+
         const arrayFiveDays: any[] = []
         const arrayFiveDaysTemperaturas: number[] = []
         let maxTemp: number | undefined = undefined
         let minTemp: number | undefined = undefined
-
-
 
         resp.list.filter((x: any) => {
           arrayFiveDaysTemperaturas.push(x.main.temp)
@@ -83,9 +73,8 @@ export class WeatherService {
 
         if (minTemp !== undefined && maxTemp !== undefined) {
 
-
           resp.list.forEach((e: any) => {
-          
+
             arrayFiveDays.push({
               'day': `${e.dt_txt.slice(5, 10)}`,
               'hour': `${e.dt_txt.slice(5, 10)} - ${e.dt_txt.slice(11, 16)}`,
@@ -97,14 +86,11 @@ export class WeatherService {
               'main': e.weather[0].main,
               'visibility': e.visibility,
               'speedWind': e.wind.speed
-
             })
           })
         }
-
         return arrayFiveDays
       })
-
     ).subscribe(
       resp => { this.setFiveDaysInfo(resp) }
     )

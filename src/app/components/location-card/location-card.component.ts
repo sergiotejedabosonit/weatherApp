@@ -34,7 +34,7 @@ export class LocationCardComponent implements OnInit {
     private ls: LocationService,
     private ws: WeatherService
   ) {
-    console.log('constructor')
+     
 
   }
 
@@ -64,7 +64,7 @@ export class LocationCardComponent implements OnInit {
           }
 
           this.nameCity = `${resp.name}, ${resp.sys.country}`
-          console.log(this.tempToday)
+           
         }
 
 

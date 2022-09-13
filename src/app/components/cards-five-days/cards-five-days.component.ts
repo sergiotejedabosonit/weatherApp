@@ -27,8 +27,6 @@ export class CardsFiveDaysComponent implements OnInit {
     this.ws.fiveDaysInfo$.subscribe( resp => {
       if( resp[0] !== undefined ){
       this.products.push(resp[0], resp[8], resp[16], resp[24], resp[32])
-    console.log(this.products);
-
      }} )
 
     

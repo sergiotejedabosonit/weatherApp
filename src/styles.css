@@ -12,6 +12,7 @@
 }
 
 .map_dimension{
+    min-height: 200px;
     padding: 20px;
     border-radius: 20px;
 }

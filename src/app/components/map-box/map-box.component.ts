@@ -22,7 +22,7 @@ export class MapBoxComponent implements AfterViewInit {
   constructor(
     private ls: LocationService
   ) {
-    { this.ls.infoMap$.subscribe(resp =>{console.log(resp); this.location = resp}) }
+    { this.ls.infoMap$.subscribe(resp => this.location = resp ) }
     
     { setTimeout(()=> {
       this.mostrarMapa = true
