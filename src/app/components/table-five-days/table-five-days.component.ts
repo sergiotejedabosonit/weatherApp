@@ -4,6 +4,7 @@ import { LocationService } from '../../services/location.service';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { distinct, map, tap } from 'rxjs';
+import { identifierName } from '@angular/compiler';
 
 @Component({
   selector: 'app-table-five-days',
@@ -38,15 +39,16 @@ export class TableFiveDaysComponent implements OnInit {
     
     )
 
-    this.ws.fiveDaysInfo$.subscribe( resp => {
-      const newArray = [];
-      newArray.push(resp[0], resp[8], resp[16], resp[24], resp[32])
-
-      newArray.map((e:any) => {
-        this.barChartData.labels?.push(e.day)
-        this.barChartData.datasets[0].data?.push(e.rain)
-        this.barChartData.datasets[1].data?.push(e.snow)
-      })
+    this.ws.weatherInfo$.subscribe( resp => {
+     console.log(resp)
+       if(resp.rain?.['1h'] !== undefined){
+           this.barChartData.datasets[0].data?.push(resp.rain?.['1h']*100)
+       }
+       if(resp.snow?.['1h'] !== undefined){
+          this.barChartData.datasets[1].data?.push(resp.snow?.['1h']*100)
+       }
+      
+       console.log(this.barChartData.datasets)
      } )
 
     this.ws.fiveDaysInfo$.subscribe( console.log)
@@ -62,13 +64,13 @@ export class TableFiveDaysComponent implements OnInit {
       {
         data: [],
         label: 'ºC',
-        backgroundColor: 'rgba(77,83,96,0.2)',
-        borderColor: 'rgba(77,83,96,1)',
-        pointBackgroundColor: 'rgba(77,83,96,1)',
-        pointBorderColor: '#fff',
+        backgroundColor: '#A9D2DC',
+        borderColor: '#517DAA',
+        pointBackgroundColor: '#6DA2D8',
+        pointBorderColor: '#415F7D',
         pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(77,83,96,1)',
-        fill: 'origin',
+        pointHoverBorderColor: '#415F7D',
+        fill: 'start',
       }
     ],
     labels: []
@@ -77,7 +79,7 @@ export class TableFiveDaysComponent implements OnInit {
   public lineChartOptions: ChartConfiguration['options'] = {
     elements: {
       line: {
-        tension: 1
+        tension: 0.5
       }
     },
     scales: {
@@ -118,7 +120,8 @@ export class TableFiveDaysComponent implements OnInit {
       y: {
         min: 0,
         max: 100
-      }
+      },
+      
     },
     plugins: {
       legend: {
@@ -132,10 +135,16 @@ export class TableFiveDaysComponent implements OnInit {
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: [  ],
+    labels: [ ' ' ],
     datasets: [
-      { data: [ ], label: 'Rain' },
-      { data: [ ], label: 'Snow' }
+      { data: [ ],
+        backgroundColor: '#AED6F1' ,
+        hoverBackgroundColor: '#2980B9', 
+        label: 'Rain' },
+      { data: [ ],
+        backgroundColor: '#D6DBDF' ,
+        hoverBackgroundColor: '#34495E', 
+         label: 'Snow' }
     ]
   };
  

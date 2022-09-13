@@ -15,7 +15,7 @@ export class LocationService {
   })
   public infoApp$ = this._infoApp.asObservable()
 
-  private _infoMap = new BehaviorSubject<LngLatLike>([undefined, undefined])
+  private _infoMap = new BehaviorSubject<LngLatLike>([0,0])
   public infoMap$ = this._infoMap.asObservable()
 
   // actualizar location con el buscador

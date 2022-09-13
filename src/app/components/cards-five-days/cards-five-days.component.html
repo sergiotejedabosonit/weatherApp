@@ -2,41 +2,78 @@
     Cargando
 </ng-container>
 <ng-template #elseTemplate>
+    <div class="row px-5">
+         <h4 class="m-0">5 days Forecast</h4>
+    </div>
+   
 
-    <p-carousel [value]="products" orientation="vertical" [style]="{'max-height':'600px', 'margin-top':'2em'}"
-        verticalViewPortHeight="400px" [numVisible]="1">
+    <p-carousel [value]="products" orientation="horizontal" [style]="{  'min-height': '534px', 'margin-top':'2em'}"
+        verticalViewPortHeight="500px" [numVisible]="1">
         <ng-template let-day pTemplate="item">
             <div class="product-item">
                 <div class="product-item-content">
-                    <div>
-                        <h5 class="px-5">
-                           Dia: {{day.day}}
-                        </h5>
+                 
+                 
+                    <div class="row mt-3 ">
+                        <div class="col-12 px-5">
+                          <h5 class="px-3">Dia: {{day.day}}</h5> 
 
-                    </div>
-                    <hr>
-                    <div class="row pt-5 px-4">
-                        <div class="col-4">
-                            <h5>{{day.temp | number:".0-0"}} ºC</h5>
+                           
                         </div>
-                        <div class="col-8">
-                            <div *ngIf="day.mode === 'broken clouds'">
-                                <img src="../../../assets/icons/nube.png" width="50px" height="50px">
+                        <div class="col-12 mt-3  d-flex  justify-content-center ">
+                           
+ 
+                             <h4>{{day.temp | number:".0-0"}} ºC</h4>
+                         </div>
+                        <div class="col-12 d-flex flex-column w-100  align-items-center">
+                         
+                            <div *ngIf="day.main === 'Clear'">
+                                <img src="../../../assets/icons/dom.png" class="icons_weather" />
                             </div>
+                            <div *ngIf="day.main === 'Clouds' && day.mode === 'few clouds'">
+                                <img src="../../../assets/icons/nubladoOne.png" class="icons_weather" />
+                            </div>
+                            <div *ngIf="day.main === 'Clouds' && day.mode === 'scattered clouds'">
+                                <img src="../../../assets/icons/nublado.png" class="icons_weather" />
+                            </div>
+                            <div *ngIf="day.main === 'Clouds' && day.mode === 'broken clouds'">
+                                <img src="../../../assets/icons/nube.png" class="icons_weather" />
+                            </div>
+                    
+                            <div *ngIf="day.main === 'Clouds' && day.mode === 'overcast clouds'">
+                                <img src="../../../assets/icons/nube.png" class="icons_weather" />
+                            </div>
+                            <div *ngIf="day.main === 'Drizzle'">
+                                <img src="../../../assets/icons/lluvia.png" class="icons_weather" />
+                            </div>
+                            <div *ngIf="day.main === 'Rain'">
+                                <img src="../../../assets/icons/lluviaSol.png" class="icons_weather" />
+                            </div>
+                            <div *ngIf="day.main === 'Thunderstorm'">
+                                <img src="../../../assets/icons/tormenta.png" class="icons_weather" />
+                            </div>
+                            <div *ngIf="day.main === 'Snow'">
+                                <img src="../../../assets/icons/nevando.png" class="icons_weather" />
+                            </div>
+                            <div *ngIf="day.main === 'Snow'">
+                                <img src="../../../assets/icons/nevando.png" class="icons_weather" />
+                            </div>
+                            <div
+                                *ngIf="day.main === 'Mist' || day.main === 'Smoke' || day.main === 'Haze' || day.main === 'Dust' || day.main === 'Fog' || day.main === 'Sand' || day.main === 'Ash' || day.main === 'Squall' || day.main === 'Tornado' ">
+                                <img src="../../../assets/icons/tornado.png" class="icons_weather" />
+                            </div>
+                             <h5>{{day.mode | titlecase}}</h5> 
                         </div>
                         
                     </div>
-                    <div class="row px-4 pt-5">
-                        <div class="col-6">
-                            <p>Speed Wind: {{day.speedWind}}km/h</p>
-                            <p>{{day.mode | titlecase}}</p>
-                            <p><img src="../../../assets/icons/paraguas.png" width="25px" height="25px"> {{ day.rain}}%</p>
+                    <div class="row  px-5 mt-3">
+                        <div class="col-8">
+                            <p><strong> Speed Wind:</strong> {{day.speedWind}}km/h</p>
+                             
+                            <p><strong>Humidity: </strong> {{day.humidity}}%</p>
+                            <p><strong>Visibility:</strong> {{day.visibility}}km</p>
                         </div>
-                        <div class="col-6">
-                            <p>Humidity: {{day.humidity}}%</p>
-                            <p>Visibility: {{day.visibility}}km</p>
-                            <p><img src="../../../assets/icons/copoNieve.png" width="25px" height="25px"> {{ day.snow}}%</p>
-                        </div>
+                    
 
 
 

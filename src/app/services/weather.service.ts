@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, } from 'rxjs';
+import { BehaviorSubject, map,  tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
  
 
@@ -47,7 +47,9 @@ export class WeatherService {
 
   getWeather(lon: number | null, lat: number | null, apiKey: string) {
     if (lon !== null && lat !== null) {
-      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${environment.API_KEY}&units=metric`).subscribe(resp => this.setWeatherInfo(resp))
+      this.http.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${environment.API_KEY}&units=metric`).pipe(
+        tap(e => console.log(e))
+      ).subscribe(resp => this.setWeatherInfo(resp))
     }
   }
 
@@ -83,6 +85,7 @@ export class WeatherService {
 
 
           resp.list.forEach((e: any) => {
+          
             arrayFiveDays.push({
               'day': `${e.dt_txt.slice(5, 10)}`,
               'hour': `${e.dt_txt.slice(5, 10)} - ${e.dt_txt.slice(11, 16)}`,

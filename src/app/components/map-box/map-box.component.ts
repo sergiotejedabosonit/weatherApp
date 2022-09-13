@@ -42,10 +42,15 @@ setTimeout(()=> {
       container: 'map-mapbox', // container ID
       style: 'mapbox://styles/mapbox/streets-v11', // style URL
       center: this.location, // starting position [lng, lat]
-      zoom: 11, // starting zoom
+      zoom: 12.5, // starting zoom
       projection: {name: "globe"}
      
     });
+
+    const marker = new mapboxgl.Marker()
+    .setLngLat(this.location)
+    .addTo(map);
+
     this.mostrarMapa = true
   }, 1000)
 
