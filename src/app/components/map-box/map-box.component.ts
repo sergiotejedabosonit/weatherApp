@@ -22,7 +22,7 @@ export class MapBoxComponent implements AfterViewInit {
   constructor(
     private ls: LocationService
   ) {
-    { this.ls.infoMap$.subscribe(resp => this.location = resp ) }
+    
     
     { setTimeout(()=> {
       this.mostrarMapa = true
@@ -33,28 +33,42 @@ export class MapBoxComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
+     this.ls.infoMap$.subscribe(resp => {
+      console.log('por aqui')
+      this.mostrarMapa = false,
+      this.location = resp
+    console.log(this.location)
+
     
-  
-setTimeout(()=> {
-    
-    (mapboxgl as typeof mapboxgl).accessToken = environment.MAPBOX_KEY
-    const map = new mapboxgl.Map({
-      container: 'map-mapbox', // container ID
-      style: 'mapbox://styles/mapbox/streets-v11', // style URL
-      center: this.location, // starting position [lng, lat]
-      zoom: 13, // starting zoom
-      projection: {name: "globe"}
+    {setTimeout(()=> {
      
-    });
+      (mapboxgl as typeof mapboxgl).accessToken = environment.MAPBOX_KEY
 
-    const marker = new mapboxgl.Marker()
-    .setLngLat(this.location)
-    .addTo(map);
+      this.mostrarMapa = true
 
-    this.mostrarMapa = true
-  }, 1000)
+      const map = new mapboxgl.Map({
+        container: 'map-mapbox', // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: this.location, // starting position [lng, lat]
+        zoom: 10, // starting zoom
+        projection: {name: "globe"}
+       
+      });
+  
+      const marker = new mapboxgl.Marker()
+      .setLngLat(this.location)
+      .addTo(map);
+  
+     this.mostrarMapa = true
+    }, 500)
+  }
+    }
+      )
+      }
+  
+
 
   
-  }
+  
 
 }

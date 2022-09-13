@@ -25,6 +25,7 @@ export class CardsFiveDaysComponent implements OnInit {
 	constructor(private ws: WeatherService ) {
    
     this.ws.fiveDaysInfo$.subscribe( resp => {
+      this.products = []
       if( resp[0] !== undefined ){
       this.products.push(resp[0], resp[8], resp[16], resp[24], resp[32])
      }} )

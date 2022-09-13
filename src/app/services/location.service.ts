@@ -3,6 +3,8 @@ import { LngLatLike } from 'mapbox-gl';
 import { BehaviorSubject } from 'rxjs';
 import { infoApp } from '../interfaces/interfaces';
 import { WeatherService } from './weather.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +62,19 @@ export class LocationService {
 
 
   constructor(
-    private ws: WeatherService
+    private ws: WeatherService,
+    private http: HttpClient
   ) { }
+
+
+  // serachCity
+
+  
+  getCityLocationList(city: string){
+
+    return this.http.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${environment.API_KEY}`) 
+  }
+
+
+
 }

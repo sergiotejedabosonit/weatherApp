@@ -8,7 +8,7 @@
             <h4 class="m-0">5 Day / 3 Hour Forecast</h4>
        </div>
      
-
+<div *ngIf="mostrarTabla1">
         <div class="flex mt-1 p-3">
             <div class="flex-item">
                 <div style="display: block;">
@@ -22,12 +22,12 @@
                 </div>
             </div>
         </div>
-
+    </div>
         <button (click)="changeGrafic(false)" pButton pRipple type="button"   class="p-button-outlined p-button-secondary float-end  mt-2">Rain/Snow Today</button>
     </ng-container>
     <ng-template #secondT>
         <div class="row px-5" >
-            <h4 class="m-0">Rain and snow Today</h4>
+            <h4 class="m-0">Rain and snow last hour Today</h4>
        </div>
 
         <div style="display: block" class="mt-1 p-5">

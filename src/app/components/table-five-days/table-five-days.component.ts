@@ -16,7 +16,7 @@ export class TableFiveDaysComponent implements OnInit {
   maxTempTable: number = 50
 
   tempOrRain: boolean = true;
-
+  mostrarTabla1: boolean = true
 
   constructor(
     private ws: WeatherService,
@@ -25,36 +25,50 @@ export class TableFiveDaysComponent implements OnInit {
 
   ngOnInit(): void {
     this.ws.fiveDaysInfo$.subscribe(resp => {
-      if (resp.length !== undefined){
+      console.log('cambio aqui')
+     
+      if (resp.length !== undefined) {
+        this.mostrarTabla1 = false
+       this.lineChartData.labels = []
+      this.lineChartData.datasets[0].data = []
+
+
         resp.map((element: any) => {
-          
+
+
           this.lineChartData.labels?.push(element.hour)
           this.lineChartData.datasets[0].data.push(element.temp);
-          
-        })   
-        }
+
+        })
+
+        setTimeout(()=>{
+          this.mostrarTabla1 = true
+        },500)
+      }
 
 
     }
-    
+
     )
 
-    this.ws.weatherInfo$.subscribe( resp => {
-     
-       if(resp.rain?.['1h'] !== undefined){
-           this.barChartData.datasets[0].data?.push(resp.rain?.['1h']*100)
-       }
-       if(resp.snow?.['1h'] !== undefined){
-          this.barChartData.datasets[1].data?.push(resp.snow?.['1h']*100)
-       }
-      
-       
-     } )
+    this.ws.weatherInfo$.subscribe(resp => {
 
-   
+      if (resp.rain?.['1h'] !== undefined) {
+        this.barChartData.datasets[0].data = []
+        this.barChartData.datasets[0].data?.push(resp.rain?.['1h'] )
+      }
+      if (resp.snow?.['1h'] !== undefined) {
+        this.barChartData.datasets[1].data = []
+        this.barChartData.datasets[1].data?.push(resp.snow?.['1h'] )
+      }
+
+
+    })
+
+
   }
 
-  changeGrafic(data: boolean){
+  changeGrafic(data: boolean) {
     this.tempOrRain = data
   }
 
@@ -85,12 +99,12 @@ export class TableFiveDaysComponent implements OnInit {
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
       x: {},
-      'y-axis-0':{
+      'y-axis-0': {
         position: 'left',
         min: 0,
         max: 40
-        
-      
+
+
       }
     },
 
@@ -102,7 +116,7 @@ export class TableFiveDaysComponent implements OnInit {
 
   public lineChartType: ChartType = 'line';
 
-  
+
   // events
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     return
@@ -119,9 +133,9 @@ export class TableFiveDaysComponent implements OnInit {
       x: {},
       y: {
         min: 0,
-        max: 100
+        max: 10
       },
-      
+
     },
     plugins: {
       legend: {
@@ -131,21 +145,25 @@ export class TableFiveDaysComponent implements OnInit {
   };
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [
-    
+
   ];
 
   public barChartData: ChartData<'bar'> = {
-    labels: [ ' ' ],
+    labels: [' '],
     datasets: [
-      { data: [ ],
-        backgroundColor: '#AED6F1' ,
-        hoverBackgroundColor: '#2980B9', 
-        label: '% Rain' },
-      { data: [ ],
-        backgroundColor: '#D6DBDF' ,
-        hoverBackgroundColor: '#34495E', 
-         label: '% Snow' }
+      {
+        data: [],
+        backgroundColor: '#AED6F1',
+        hoverBackgroundColor: '#2980B9',
+        label: 'l/h Rain'
+      },
+      {
+        data: [],
+        backgroundColor: '#D6DBDF',
+        hoverBackgroundColor: '#34495E',
+        label: 'l/h Snow'
+      }
     ]
   };
- 
+
 }

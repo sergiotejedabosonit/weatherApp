@@ -1,0 +1,25 @@
+ 
+<div>
+
+
+    <form #formDinamico="ngForm" autocomplete="off" (submit)="changeCity(0)">
+        <span class="p-input-icon-left w-100">
+<i class="pi pi-search" type="submit"></i>
+            <input type="text" pInputText placeholder="Search City" name="city" [(ngModel)]="city" class="w-100 " (keyup)="searchCity()" />
+          
+        </span>
+
+
+    </form>
+    <div *ngIf="city !== ''" class="container_cities_search">
+    
+    
+
+    <div *ngFor="let city of cities, let i = index" >
+       
+           <button class=" button_click_cities" (click)="changeCity(i)">
+            <p>{{city.name}} - {{city.country}}</p></button> 
+    </div></div>
+   </div> 
+   
+   
