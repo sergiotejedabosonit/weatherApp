@@ -16,7 +16,7 @@
                  
                     <div class="row mt-3 ">
                         <div class="col-12 px-5">
-                          <h5 class="px-3">Dia: {{day.day}}</h5> 
+                          <h5 class="px-3"><i class="pi pi-calendar" style="font-size: 1.2rem"></i> {{day.day}}</h5> 
 
                            
                         </div>
@@ -68,10 +68,10 @@
                     </div>
                     <div class="row  px-5 mt-3">
                         <div class="col-8">
-                            <p><strong> Speed Wind:</strong> {{day.speedWind}}km/h</p>
+                            <p><strong> Speed Wind:</strong> {{day.speedWind}} km/h</p>
                              
-                            <p><strong>Humidity: </strong> {{day.humidity}}%</p>
-                            <p><strong>Visibility:</strong> {{day.visibility}}km</p>
+                            <p><strong>Humidity: </strong> {{day.humidity}} %</p>
+                            <p><strong>Visibility:</strong> {{day.visibility/1000}} km</p>
                         </div>
                     
 

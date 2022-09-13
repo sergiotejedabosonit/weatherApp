@@ -1,10 +1,10 @@
-<div class="row widht_court">
+<div class="row widht_court  ">
     <div class="row p-3">
-        <div *ngIf="today.hour < 13">
-           <h5> {{today.day}} {{ today.hour | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} am </h5>
+        <div *ngIf="today.hour < 13" >
+           <h5 class=" float-end"> {{today.day}} {{ today.hour | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} am </h5>
         </div>
         <div *ngIf="today.hour > 12 && today.hour < 24 ">
-          <h5>  {{today.day}} {{ today.hour -12 | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} pm </h5>
+          <h5 class=" float-end">  {{today.day}} {{ today.hour -12 | number:"2.0-0"}}:{{today.minute | number:"2.0-0"}} pm </h5>
         </div>
     </div>
     <hr>
@@ -19,7 +19,7 @@
         </div>
 
     </div>
-    <div class="col-6">
+    <div class="col-6 w-50 d-flex justify-content-center">
         <div *ngIf="tempToday.main === 'Clear'">
             <img src="../../../assets/icons/dom.png" class="icons_weather" />
         </div>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row container-data-today">
         <p class='title-subtitleCard'>
             <strong> Feels like {{tempToday.temp}}º. {{tempToday.mode | titlecase}} </strong>
         </p>
@@ -66,40 +66,40 @@
             <div class="col-5">
                 <div>
                     <div *ngIf="tempToday.deg >= 325 || tempToday.deg < 35">
-                        <i class="pi pi-angle-up"></i> {{ tempToday.speed | number:".0-2"}}m/s N
+                        <i class="pi pi-angle-up"></i> {{ tempToday.speed | number:".0-2"}} m/s N
                     </div>
                     <div *ngIf="tempToday.deg >= 35 && tempToday.deg < 135">
-                        <i class="pi pi-angle-right"></i> {{ tempToday.speed | number:".0-2"}}m/s E
+                        <i class="pi pi-angle-right"></i> {{ tempToday.speed | number:".0-2"}} m/s E
                     </div>
                     <div *ngIf="tempToday.deg >= 135 && tempToday.deg < 235">
-                        <i class="pi pi-angle-down"></i> {{ tempToday.speed | number:".0-2"}}m/s S
+                        <i class="pi pi-angle-down"></i> {{ tempToday.speed | number:".0-2"}} m/s S
                     </div>
                     <div *ngIf="tempToday.deg >= 235 && tempToday.deg < 335">
-                        <i class="pi pi-angle-left"></i> {{ tempToday.speed | number:".0-2"}}m/s W
+                        <i class="pi pi-angle-left"></i> {{ tempToday.speed | number:".0-2"}} m/s W
                     </div>
                 </div>
 
             </div>
             <div class="col-5">
-                <i class="pi pi-check-circle"></i> {{tempToday.pressure}}hPa
+                <i class="pi pi-check-circle"></i> {{tempToday.pressure}} hPa
             </div>
         </div>
         <div class="row">
             <div class="col-1"></div>
             <div class="col-5">
-                Humidity: {{tempToday.humidity | number:".0-0"}}%
+                Humidity: {{tempToday.humidity | number:".0-0"}} %
             </div>
             <div class="col-5">
-                Visibility: {{ tempToday.visibility/1000 | number:".0-0"}}km
+                Visibility: {{ tempToday.visibility/1000 | number:".0-0"}} km
             </div>
         </div>
         <div class="row">
             <div class="col-1"></div>
             <div class="col-5">
-                Max: {{ tempToday.max | number:".0-0"}}ºC
+                Max: {{ tempToday.max | number:".0-0"}} ºC
             </div>
             <div class="col-5">
-                Min: {{ tempToday.min | number:".0-0"}}ºC
+                Min: {{ tempToday.min | number:".0-0"}} ºC
             </div>
         </div>
 

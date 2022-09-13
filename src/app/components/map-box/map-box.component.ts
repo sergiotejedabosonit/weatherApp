@@ -42,7 +42,7 @@ setTimeout(()=> {
       container: 'map-mapbox', // container ID
       style: 'mapbox://styles/mapbox/streets-v11', // style URL
       center: this.location, // starting position [lng, lat]
-      zoom: 12.5, // starting zoom
+      zoom: 13, // starting zoom
       projection: {name: "globe"}
      
     });
